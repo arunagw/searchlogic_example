@@ -1,0 +1,23 @@
+- title "Blogs"
+- form_for @search do |f|
+  = f.text_field :title_like_any
+  = f.submit
+%table
+  %tr
+    %th
+      = order @search, :by => :title
+    %th Body
+    %th
+      = order @search, :by => :created_at
+    %th
+      = order @search, :by => :updated_at
+  - for blog in @blogs
+    %tr
+      %td= h blog.title
+      %td= h blog.body
+      %td= h blog.created_at
+      %td= h blog.updated_at
+      %td= link_to "Show", blog
+      %td= link_to "Edit", edit_blog_path(blog)
+      %td= link_to "Destroy", blog, :confirm => 'Are you sure?', :method => :delete
+%p= link_to "New Blog", new_blog_path
